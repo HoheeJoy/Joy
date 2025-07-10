@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mary Joy Carballo | Web Developer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+      color: #333;
+      min-height: 100vh;
+      overflow-x: hidden;
+      perspective: 1000px;
+    }
+
+    /* Smooth scroll behavior */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Header with 3D effect */
+    header {
+      padding: 80px 20px;
+      text-align: center;
+      background-color: rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      animation: slideDown 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+      transform-style: preserve-3d;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, rgba(106, 17, 203, 0.1) 0%, rgba(37, 117, 252, 0.1) 100%);
+      z-index: -1;
+    }
+
+    header h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      background: linear-gradient(45deg, #6a11cb, #2575fc, #6a11cb);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: textGradient 8s ease infinite, textPop 1.5s ease both;
+      background-size: 300% 300%;
+      text-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transform: translateZ(50px);
+    }
+
+    header p {
+      font-size: 1.3rem;
+      margin-top: 15px;
+      color: #555;
+      font-weight: 400;
+      transform: translateZ(30px);
+    }
+
+    .photo {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 30px auto;
+      display: block;
+      border: 5px solid rgba(255, 255, 255, 0.9);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 
+                  0 0 0 10px rgba(106, 17, 203, 0.1),
+                  0 0 0 15px rgba(37, 117, 252, 0.1);
+      animation: photoPop 2s cubic-bezier(0.68, -0.55, 0.265, 1.55) both, 
+                 float 6s ease-in-out infinite;
+      transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+      filter: drop-shadow(0 10px 20px rgba(106, 17, 203, 0.4));
+      transform-style: preserve-3d;
+      transform: rotateY(0deg) rotateX(0deg);
+    }
+
+    .photo:hover {
+      transform: scale(1.1) rotateY(10deg) rotateX(5deg);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4), 
+                  0 0 0 10px rgba(106, 17, 203, 0.2),
+                  0 0 0 15px rgba(37, 117, 252, 0.2);
+    }
+
+    /* 3D Section Cards */
+    .section {
+      max-width: 1000px;
+      margin: 60px auto;
+      padding: 40px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 25px;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15),
+                  inset 0 -5px 20px rgba(0,0,0,0.05),
+                  inset 0 5px 20px rgba(255,255,255,0.5);
+      transition: all 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      opacity: 0;
+      transform: translateY(100px) rotateX(20deg) scale(0.9);
+      transform-style: preserve-3d;
+      transform-origin: center center;
+    }
+
+    .section.visible {
+      opacity: 1;
+      transform: translateY(0) rotateX(0) scale(1);
+    }
+
+    .section:nth-child(odd) {
+      transform: translateY(100px) rotateX(-20deg) scale(0.9);
+    }
+
+    .section:hover {
+      transform: translateY(-10px) rotateY(5deg) scale(1.03) !important;
+      box-shadow: 0 35px 60px rgba(0, 0, 0, 0.2),
+                 inset 0 -8px 25px rgba(0,0,0,0.1),
+                 inset 0 8px 25px rgba(255,255,255,0.6);
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 25px;
+      position: relative;
+      display: inline-block;
+      background: linear-gradient(45deg, #6a11cb, #2575fc);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      transform: translateZ(40px);
+    }
+
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      left: 0;
+      width: 80px;
+      height: 5px;
+      background: linear-gradient(90deg, #6a11cb, #2575fc);
+      border-radius: 3px;
+      transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+      transform: translateZ(20px);
+      box-shadow: 0 4px 10px rgba(106, 17, 203, 0.3);
+    }
+
+    .section:hover h2::after {
+      width: 120px;
+      height: 6px;
+    }
+
+    p {
+      line-height: 1.9;
+      margin-bottom: 20px;
+      font-size: 1.1rem;
+      transform: translateZ(30px);
+    }
+
+    ul {
+      padding-left: 30px;
+      list-style-type: none;
+      transform: translateZ(20px);
+    }
+
+    li {
+      margin-bottom: 15px;
+      font-size: 1.1rem;
+      position: relative;
+      padding-left: 40px;
+      line-height: 1.7;
+      transition: all 0.4s ease;
+    }
+
+    li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 15px;
+      height: 15px;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      border-radius: 50%;
+      transform: scale(0) rotate(180deg);
+      transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      box-shadow: 0 4px 8px rgba(106, 17, 203, 0.3);
+    }
+
+    li:hover {
+      transform: translateX(10px);
+    }
+
+    li:hover::before {
+      transform: scale(1) rotate(0);
+    }
+
+    a {
+      color: #6a11cb;
+      text-decoration: none;
+      transition: all 0.4s ease;
+      position: relative;
+      font-weight: 500;
+    }
+
+    a:hover {
+      color: #2575fc;
+    }
+
+    a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #6a11cb, #2575fc);
+      transition: width 0.4s ease;
+      border-radius: 2px;
+    }
+
+    a:hover::after {
+      width: 100%;
+    }
+
+    .contact {
+      text-align: center;
+      margin-top: 40px;
+      transform-style: preserve-3d;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 30px;
+      transform: translateZ(30px);
+    }
+
+    .contact a {
+      display: inline-flex;
+      align-items: center;
+      padding: 15px 30px;
+      background: linear-gradient(45deg, #6a11cb, #2575fc);
+      color: white;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+      box-shadow: 0 10px 25px rgba(106, 17, 203, 0.4);
+      overflow: hidden;
+      position: relative;
+      transform-style: preserve-3d;
+    }
+
+    .contact a i {
+      margin-right: 10px;
+      font-size: 1.2rem;
+      transform: translateZ(10px);
+    }
+
+    .contact a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: 0.6s;
+    }
+
+    .contact a:hover {
+      transform: translateY(-5px) rotateY(10deg) scale(1.05);
+      box-shadow: 0 15px 35px rgba(106, 17, 203, 0.6);
+    }
+
+    .contact a:hover::before {
+      left: 100%;
+    }
+
+    /* Floating back to top button with 3D effect */
+    .back-to-top {
+      position: fixed;
+      bottom: 40px;
+      right: 40px;
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(45deg, #6a11cb, #2575fc);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+      z-index: 1000;
+      transform-style: preserve-3d;
+    }
+
+    .back-to-top.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .back-to-top:hover {
+      transform: translateY(-8px) rotateY(15deg) scale(1.1);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    }
+
+    .back-to-top i {
+      transform: translateZ(10px);
+    }
+
+    /* Keyframe animations */
+    @keyframes slideDown {
+      0% { transform: translateY(-150px) rotateX(30deg); opacity: 0; }
+      100% { transform: translateY(0) rotateX(0); opacity: 1; }
+    }
+
+    @keyframes fadeInUp {
+      0% { transform: translateY(100px) rotateX(20deg) scale(0.9); opacity: 0; }
+      100% { transform: translateY(0) rotateX(0) scale(1); opacity: 1; }
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px) rotateY(0deg); }
+      50% { transform: translateY(-15px) rotateY(5deg); }
+      100% { transform: translateY(0px) rotateY(0deg); }
+    }
+
+    @keyframes textGradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes textPop {
+      0% { letter-spacing: -10px; opacity: 0; }
+      70% { letter-spacing: 5px; }
+      100% { letter-spacing: normal; opacity: 1; }
+    }
+
+    @keyframes photoPop {
+      0% { transform: scale(0) rotate(180deg); opacity: 0; }
+      80% { transform: scale(1.1) rotate(-10deg); }
+      100% { transform: scale(1) rotate(0); opacity: 1; }
+    }
+
+    /* Particle background effect */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+      transform-style: preserve-3d;
+    }
+
+    .particle {
+      position: absolute;
+      background: linear-gradient(45deg, rgba(106, 17, 203, 0.3), rgba(37, 117, 252, 0.3));
+      border-radius: 50%;
+      pointer-events: none;
+      transform-style: preserve-3d;
+    }
+
+    /* Glowing cursor follower */
+    .cursor-follower {
+      position: fixed;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(106, 17, 203, 0.4), transparent 70%);
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%) translateZ(0);
+      mix-blend-mode: screen;
+      transition: transform 0.1s ease;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      header {
+        padding: 60px 20px;
+      }
+      
+      header h1 {
+        font-size: 2.5rem;
+      }
+      
+      header p {
+        font-size: 1.1rem;
+      }
+      
+      .photo {
+        width: 150px;
+        height: 150px;
+      }
+      
+      .section {
+        padding: 30px 20px;
+        margin: 40px 20px;
+      }
+      
+      h2 {
+        font-size: 2rem;
+      }
+      
+      .contact-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+      }
+      
+      .contact a {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+      }
+      
+      .back-to-top {
+        width: 50px;
+        height: 50px;
+        bottom: 30px;
+        right: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Particle background -->
+  <div class="particles" id="particles-js"></div>
+  
+  <!-- Cursor follower -->
+  <div class="cursor-follower" id="cursorFollower"></div>
+
+  <header>
+    <h1>Mary Joy Carballo</h1>
+    <p>Web Developer | Age: 21 | Female</p>
+    <p>Student at Jose Rizal Memorial State University</p>
+    <img src="c:/Users/ASUS/Downloads/WEBSITE/joy.jpg" alt="Mary Joy Photo" class="photo">
+  </header>
+
+  <main>
+    <section class="section" id="about">
+      <h2>About Me</h2>
+      <p>I am a passionate and aspiring web developer who loves creating interactive and beautiful websites. I believe in continuous learning and making user-friendly interfaces that create great experiences. Currently, I'm improving my skills in HTML, CSS, JavaScript, PHP, and MySQL.</p>
+      <p>My journey in web development began when I discovered the power of turning ideas into functional, visual experiences. I enjoy the creative problem-solving that comes with coding and the satisfaction of seeing my projects come to life.</p>
+    </section>
+
+    <section class="section" id="skills">
+      <h2>Skills</h2>
+      <ul>
+        <li><strong>Frontend Development:</strong> HTML5, CSS3, JavaScript (ES6+)</li>
+        <li><strong>Responsive Web Design:</strong> Media queries, Flexbox, CSS Grid</li>
+        <li><strong>Backend Development:</strong> PHP & MySQL for database-driven applications</li>
+        <li><strong>UI/UX Principles:</strong> Creating intuitive and visually appealing interfaces</li>
+        <li><strong>Authentication Systems:</strong> Secure login & registration implementations</li>
+        <li><strong>Version Control:</strong> Basic Git and GitHub workflow</li>
+      </ul>
+    </section>
+
+    <section class="section" id="projects">
+      <h2>Projects</h2>
+      <ul>
+        <li>
+          <strong>3D Login Dashboard:</strong> Stylish user login/register dashboard with animated background and form validation.
+          [<a href="#" target="_blank">View Project</a>]
+        </li>
+        <li>
+          <strong>Donna's Bookshelf App:</strong> Custom offline web app featuring interactive poems and elegant designs with smooth page transitions.
+          [<a href="#" target="_blank">View Project</a>]
+        </li>
+        <li>
+          <strong>Milktea Paradise:</strong> Responsive online menu interface for a milk tea business with category filtering and cart functionality.
+          [<a href="#" target="_blank">View Project</a>]
+        </li>
+        <li>
+          <strong>Student Portfolio Template:</strong> Clean, modern template for showcasing academic work and projects.
+          [<a href="#" target="_blank">View Project</a>]
+        </li>
+      </ul>
+    </section>
+
+    <section class="section" id="education">
+      <h2>Education</h2>
+      <p><strong>Jose Rizal Memorial State University</strong><br>
+      Bachelor's Degree in Information Technology (In Progress)</p>
+      <p>Expected Graduation: 2024</p>
+      <p><strong>Relevant Coursework:</strong> Web Development, Database Systems, Programming Fundamentals, User Interface Design, Software Engineering</p>
+    </section>
+
+    <section class="section contact" id="contact">
+      <h2>Contact Me</h2>
+      <p>Feel free to reach out for collaborations or just to say hello!</p>
+      <div class="contact-links">
+        <a href="mailto:maryjoycarballo13@gmail.com">
+          <i class="fas fa-envelope"></i> Email
+        </a>
+        <a href="#" target="https://www.facebook.com/share/1AwTpwitjp/">
+          <i class="fab fa-facebook-f"></i> Facebook
+        </a>
+        <a href="#" target="_blank">
+          <i class="fab fa-github"></i> GitHub
+        </a>
+        <a href="MaryJoy_Carballo_Resume.pdf" download>
+          <i class="fas fa-file-download"></i> Download Resume
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Back to top button -->
+  <div class="back-to-top" id="backToTop">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+
+  <script>
+    // Intersection Observer for section animations
+    const sections = document.querySelectorAll('.section');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -100px 0px'
+    });
+    
+    sections.forEach(section => {
+      observer.observe(section);
+    });
+
+    // Back to top button functionality
+    const backToTopButton = document.getElementById('backToTop');
+    
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) {
+        backToTopButton.classList.add('active');
+      } else {
+        backToTopButton.classList.remove('active');
+      }
+    });
+    
+    backToTopButton.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+    // Particle background effect
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles-js');
+      const particleCount = 50;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        
+        // Random properties
+        const size = Math.random() * 15 + 5;
+        const posX = Math.random() * window.innerWidth;
+        const posY = Math.random() * window.innerHeight;
+        const opacity = Math.random() * 0.5 + 0.1;
+        const duration = Math.random() * 25 + 15;
+        const delay = Math.random() * 10;
+        const depth = Math.random() * 100 - 50;
+        
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.left = `${posX}px`;
+        particle.style.top = `${posY}px`;
+        particle.style.opacity = opacity;
+        particle.style.animation = `float ${duration}s ease-in-out ${delay}s infinite`;
+        particle.style.transform = `translateZ(${depth}px)`;
+        
+        particlesContainer.appendChild(particle);
+      }
+    }
+    
+    // Cursor follower effect
+    const cursorFollower = document.getElementById('cursorFollower');
+    
+    document.addEventListener('mousemove', (e) => {
+      cursorFollower.style.left = `${e.clientX}px`;
+      cursorFollower.style.top = `${e.clientY}px`;
+      
+      // Scale up when hovering interactive elements
+      const target = e.target;
+      if (target.tagName === 'A' || target.tagName === 'BUTTON' || target.classList.contains('photo')) {
+        cursorFollower.style.transform = `translate(-50%, -50%) scale(2)`;
+        cursorFollower.style.background = `radial-gradient(circle, rgba(106, 17, 203, 0.6), transparent 70%)`;
+      } else {
+        cursorFollower.style.transform = `translate(-50%, -50%) scale(1)`;
+        cursorFollower.style.background = `radial-gradient(circle, rgba(106, 17, 203, 0.4), transparent 70%)`;
+      }
+    });
+
+    // Initialize particles when DOM is loaded
+    document.addEventListener('DOMContentLoaded', () => {
+      createParticles();
+      
+      // Add slight delay to header animations for dramatic effect
+      setTimeout(() => {
+        document.querySelector('header').style.animation = 'slideDown 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) both';
+      }, 300);
+    });
+
+    // Smooth scroll for navigation
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    // Add tilt effect to sections on mouse move
+    sections.forEach(section => {
+      section.addEventListener('mousemove', (e) => {
+        const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+        const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+        section.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg) translateY(-10px) scale(1.03)`;
+      });
+
+      section.addEventListener('mouseleave', () => {
+        section.style.transform = 'translateY(-10px) scale(1.03)';
+      });
+    });
+  </script>
+</body>
+</html>
