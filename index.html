@@ -400,6 +400,110 @@
       transition: transform 0.1s ease;
     }
 
+    /* New Projects Grid Styles */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 30px;
+      margin-top: 30px;
+    }
+
+    .project-card {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+      transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+      transform-style: preserve-3d;
+      position: relative;
+      transform: translateY(50px) rotateY(20deg);
+      opacity: 0;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+    }
+
+    .project-card.visible {
+      transform: translateY(0) rotateY(0);
+      opacity: 1;
+    }
+
+    .project-card:nth-child(even) {
+      transform: translateY(50px) rotateY(-20deg);
+    }
+
+    .project-card:nth-child(even).visible {
+      transform: translateY(0) rotateY(0);
+    }
+
+    .project-image {
+      height: 180px;
+      width: 100%;
+      object-fit: cover;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .project-content {
+      padding: 20px;
+    }
+
+    .project-title {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+      color: #333;
+      font-weight: 600;
+    }
+
+    .project-description {
+      font-size: 0.95rem;
+      color: #666;
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 10px;
+    }
+
+    .project-link {
+      padding: 8px 15px;
+      font-size: 0.9rem;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .project-link.live {
+      background: linear-gradient(45deg, #6a11cb, #2575fc);
+      color: white;
+    }
+
+    .project-link.code {
+      background: rgba(106, 17, 203, 0.1);
+      color: #6a11cb;
+      border: 1px solid rgba(106, 17, 203, 0.3);
+    }
+
+    .project-link i {
+      margin-right: 5px;
+    }
+
+    .project-link:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(106, 17, 203, 0.3);
+    }
+
+    /* Project card hover effects */
+    .project-card:hover {
+      transform: translateY(-10px) rotateY(5deg) scale(1.03) !important;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+    }
+
+    .project-card:nth-child(even):hover {
+      transform: translateY(-10px) rotateY(-5deg) scale(1.03) !important;
+    }
+
     /* Responsive adjustments */
     @media (max-width: 768px) {
       header {
@@ -446,6 +550,10 @@
         bottom: 30px;
         right: 30px;
       }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -484,31 +592,62 @@
 
     <section class="section" id="projects">
       <h2>Projects</h2>
-      <ul>
-        <li>
-          <strong>3D Login Dashboard:</strong> Stylish user login/register dashboard with animated background and form validation.
-          [<a href="#" target="_blank">View Project</a>]
-        </li>
-        <li>
-          <strong>Donna's Bookshelf App:</strong> Custom offline web app featuring interactive poems and elegant designs with smooth page transitions.
-          [<a href="#" target="_blank">View Project</a>]
-        </li>
-        <li>
-          <strong>Milktea Paradise:</strong> Responsive online menu interface for a milk tea business with category filtering and cart functionality.
-          [<a href="#" target="_blank">View Project</a>]
-        </li>
-        <li>
-          <strong>Student Portfolio Template:</strong> Clean, modern template for showcasing academic work and projects.
-          [<a href="#" target="_blank">View Project</a>]
-        </li>
-      </ul>
+      <div class="projects-grid">
+        <div class="project-card">
+          <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="3D Login Dashboard" class="project-image">
+          <div class="project-content">
+            <h3 class="project-title">3D Login Dashboard</h3>
+            <p class="project-description">Stylish user login/register dashboard with animated background and form validation.</p>
+            <div class="project-links">
+              <a href="#" class="project-link live"><i class="fas fa-eye"></i> Live Demo</a>
+              <a href="#" class="project-link code"><i class="fas fa-code"></i> View Code</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Donna's Bookshelf App" class="project-image">
+          <div class="project-content">
+            <h3 class="project-title">Donna's Bookshelf App</h3>
+            <p class="project-description">Custom offline web app featuring interactive poems and elegant designs with smooth page transitions.</p>
+            <div class="project-links">
+              <a href="#" class="project-link live"><i class="fas fa-eye"></i> Live Demo</a>
+              <a href="#" class="project-link code"><i class="fas fa-code"></i> View Code</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <img src="https://images.unsplash.com/photo-1561758033-d89a9ad46330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Milktea Paradise" class="project-image">
+          <div class="project-content">
+            <h3 class="project-title">Milktea Paradise</h3>
+            <p class="project-description">Responsive online menu interface for a milk tea business with category filtering and cart functionality.</p>
+            <div class="project-links">
+              <a href="#" class="project-link live"><i class="fas fa-eye"></i> Live Demo</a>
+              <a href="#" class="project-link code"><i class="fas fa-code"></i> View Code</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <img src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Student Portfolio" class="project-image">
+          <div class="project-content">
+            <h3 class="project-title">Student Portfolio Template</h3>
+            <p class="project-description">Clean, modern template for showcasing academic work and projects with smooth animations.</p>
+            <div class="project-links">
+              <a href="#" class="project-link live"><i class="fas fa-eye"></i> Live Demo</a>
+              <a href="#" class="project-link code"><i class="fas fa-code"></i> View Code</a>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section class="section" id="education">
       <h2>Education</h2>
       <p><strong>Jose Rizal Memorial State University</strong><br>
       Bachelor's Degree in Information Technology (In Progress)</p>
-      <p>Expected Graduation: 2024</p>
+      <p>Expected Graduation: 2026</p>
       <p><strong>Relevant Coursework:</strong> Web Development, Database Systems, Programming Fundamentals, User Interface Design, Software Engineering</p>
     </section>
 
@@ -519,10 +658,10 @@
         <a href="mailto:maryjoycarballo13@gmail.com">
           <i class="fas fa-envelope"></i> Email
         </a>
-        <a href="#" target="https://www.facebook.com/share/1AwTpwitjp/">
+        <a href="https://www.facebook.com/share/1AwTpwitjp/" target="_blank">
           <i class="fab fa-facebook-f"></i> Facebook
         </a>
-        <a href="#" target="_blank">
+        <a href="https://hoheejoy.github.io/Joy/" target="_blank">
           <i class="fab fa-github"></i> GitHub
         </a>
         <a href="MaryJoy_Carballo_Resume.pdf" download>
@@ -540,11 +679,18 @@
   <script>
     // Intersection Observer for section animations
     const sections = document.querySelectorAll('.section');
+    const projectCards = document.querySelectorAll('.project-card');
     
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
+          
+          // Special animation for project cards
+          if (entry.target.classList.contains('project-card')) {
+            const index = Array.from(projectCards).indexOf(entry.target);
+            entry.target.style.transitionDelay = `${index * 0.1}s`;
+          }
         }
       });
     }, {
@@ -554,6 +700,10 @@
     
     sections.forEach(section => {
       observer.observe(section);
+    });
+    
+    projectCards.forEach(card => {
+      observer.observe(card);
     });
 
     // Back to top button functionality
@@ -613,7 +763,7 @@
       
       // Scale up when hovering interactive elements
       const target = e.target;
-      if (target.tagName === 'A' || target.tagName === 'BUTTON' || target.classList.contains('photo')) {
+      if (target.tagName === 'A' || target.tagName === 'BUTTON' || target.classList.contains('photo') || target.classList.contains('project-card')) {
         cursorFollower.style.transform = `translate(-50%, -50%) scale(2)`;
         cursorFollower.style.background = `radial-gradient(circle, rgba(106, 17, 203, 0.6), transparent 70%)`;
       } else {
@@ -643,7 +793,7 @@
       });
     });
 
-    // Add tilt effect to sections on mouse move
+    // Add tilt effect to sections and project cards on mouse move
     sections.forEach(section => {
       section.addEventListener('mousemove', (e) => {
         const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
@@ -653,6 +803,26 @@
 
       section.addEventListener('mouseleave', () => {
         section.style.transform = 'translateY(-10px) scale(1.03)';
+      });
+    });
+
+    // Enhanced 3D effect for project cards based on cursor position
+    projectCards.forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const cardRect = card.getBoundingClientRect();
+        const cardCenterX = cardRect.left + cardRect.width / 2;
+        const cardCenterY = cardRect.top + cardRect.height / 2;
+        
+        const angleX = (e.clientY - cardCenterY) / 20;
+        const angleY = (cardCenterX - e.clientX) / 20;
+        
+        card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) translateY(-10px) scale(1.03)`;
+        card.style.boxShadow = `${angleY * 2}px ${angleX * 2}px 30px rgba(0, 0, 0, 0.3)`;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'translateY(-10px) scale(1.03)';
+        card.style.boxShadow = '0 25px 50px rgba(0, 0, 0, 0.2)';
       });
     });
   </script>
